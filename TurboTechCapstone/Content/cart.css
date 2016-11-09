@@ -1,0 +1,19 @@
+div.body {
+	background-color: #FCB716;
+	font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+	font-weight: 300;
+	font-size: 15px;
+	text-align: center;
+}
+
+body.body {
+	background-color: #FCB716;
+}
+
+#pic1,#pic2,#pic3,#pic4,#pic5,#pic6,#pic6,#pic7,#pic8,#pic9 {
+	border: 5px solid scrollbar;
+	position: relative;
+	height: 250px;
+	width: 250px;
+	margin: 25px;
+}

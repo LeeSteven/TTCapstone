@@ -1,0 +1,49 @@
+#contact {
+	text-align: center;
+}
+
+#mail {
+	position: absolute;
+	margin-left: 5%;
+}
+
+textarea {
+	resize: none;
+	height: 300px;
+	width: 550px;
+}
+
+input.sizing {
+	height: 30px;
+	width: 550px;
+}
+
+div.body {
+	background-color: #FCB716;
+}
+
+button#submitEmail {
+	background-color: #dc143c;
+	border: none;
+	color: #fff;
+	padding: 17px 35px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 18px;
+	margin: 10px;
+	cursor: pointer;
+}
+
+#map {
+	margin-top: 4%;
+	height: 400px;
+	width: 600px;
+	position: static;
+	margin-left: 50%;
+}
+
+#addr {
+	position: static;
+	text-align: center;
+	margin-left: 40%;
+}

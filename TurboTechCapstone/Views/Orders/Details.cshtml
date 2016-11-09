@@ -1,0 +1,32 @@
+﻿@model TurboTechCapstone.Models.OrderAndProducts
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css.css")
+    @Styles.Render("~/Content/home.css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Content/jquery.js")
+
+    <style>
+        body {
+            background: #FCB716;
+        }
+    </style>
+</head>
+
+
+
+<h2>Orders Models Details</h2>
+
+
+
+    @Model.currentOrder.CustomerId
+

@@ -1,0 +1,37 @@
+#contact {
+	text-align: center;
+}
+
+textarea {
+	resize: none;
+}
+
+.input.sizing {
+	height: 30px;
+	width: 550px;
+}
+
+button#submitEmail {
+	background-color: #5aae6f;
+	border: none;
+	color: #fff;
+	padding: 17px 35px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 18px;
+	margin: 10px;
+	cursor: pointer;
+}
+
+#map {
+	margin-top: 0;
+	height: 100%;
+	min-height: 33em;
+	width: 100%;
+	position: static;
+}
+
+#addr {
+	position: static;
+	text-align: center;
+}

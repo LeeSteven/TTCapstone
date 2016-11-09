@@ -1,0 +1,27 @@
+      img {
+                text-align: center;
+                width: 200px;
+                height: auto;
+            }
+
+        div.desc {
+            padding: 15px;
+            text-align: center;
+        }
+
+        table {
+            height: 50px;
+            margin: auto;
+        }
+
+        #fright{
+            text-align:right;
+        }
+    
+		          #pic1{
+		             
+		              -webkit-transition: all .2s ease-in-out; 
+		          }
+		          .transition {
+		              transform: scale(1.2);
+		          }

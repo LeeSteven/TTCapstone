@@ -1,0 +1,58 @@
+﻿@model IEnumerable<TurboTechCapstone.Models.OrderAndProducts>
+
+@{
+    ViewBag.Title = "Index";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css.css")
+    @Styles.Render("~/Content/home.css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Content/jquery.js")
+
+    <style>
+        body {
+            background: #FCB716;
+        }
+    </style>
+
+</head> 
+<h2>Index</h2>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order_Id)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order_Id)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
