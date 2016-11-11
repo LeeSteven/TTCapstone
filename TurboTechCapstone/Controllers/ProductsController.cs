@@ -20,7 +20,7 @@ namespace TurboTechCapstone.Controllers
             ViewBag.OrderNum = id;
             var allProds = db.Product.ToList();
             ViewBag.AllProducts = allProds;
-            
+            ViewBag.ProductOrder = allProds.ToList();
 
             if (searchBy == "Name")
             {

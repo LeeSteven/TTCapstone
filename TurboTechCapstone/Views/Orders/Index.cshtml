@@ -1,51 +1,88 @@
 ﻿@model IEnumerable<TurboTechCapstone.Models.OrderAndProducts>
-@{
+    @{
     var productOrder = ViewBag.ProductOrder;
-}
+    var subTotal = 0;
+    var array = ViewBag.quant;
+    var count = ViewBag.count;
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css.css")
-    @Styles.Render("~/Content/home.css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/Content/jquery.js")
-
-    <style>
-        body {
-            background: #FCB716;
-        }
-    </style>
-
-
-<style>
-    img {
-        text-align: center;
-        width: 60px;
-        height: auto;
     }
-</style>
-    </head>
-<form action="" method="delete">
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Product.Image)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product.ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product.Quantity)
-            </th>
-            <th></th>
-        </tr>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <title>@ViewBag.Title</title>
+        @Styles.Render("~/Content/css.css")
+        @Styles.Render("~/Content/home.css")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/Content/jquery.js")
 
-        @foreach (var item in productOrder)
-        {
+        <style>
+            body {
+                background: #FCB716;
+            }
+
+            table {
+                border-collapse: collapse;
+            }
+
+                table td, table th {
+                    border: 1px solid black;
+                }
+
+                table tr:first-child th {
+                    border-top: 0;
+                }
+
+                table tr:last-child td {
+                    border-bottom: 0;
+                }
+
+                table tr td:first-child,
+                table tr th:first-child {
+                    border-left: 0;
+                }
+
+                table tr td:last-child,
+                table tr th:last-child {
+                    border-right: 0;
+                }
+        </style>
+
+
+        <style>
+            img {
+                text-align: center;
+                width: 60px;
+                height: auto;
+            }
+        </style>
+    </head>
+    <form action="" method="delete">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product.Image)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product.Quantity)
+                </th>
+                <th colspan="2"> @Html.DisplayNameFor(model => model.Product.Price)</th>
+
+            </tr>
+
+            @for (int i= 0; i < count; i++){
+            @*@array[i];*@
+            }
+
+
+            @foreach (var item in productOrder)
+            {
+            subTotal += @item.Product.Price;
+           
             <tr>
                 <td>
                     <img src="~/img/@item.Product.Image" />
@@ -54,33 +91,38 @@
                     @item.Product.ProductName
                 </td>
                 <td>
-                    <input type="number" min="1" max="99" step="1" value ="@item.Order.Quantity"/> 
+                    @item.Order.Quantity
                 </td>
                 <td>
-                    @Html.ActionLink("Delete","Delete","OrderAndProducts",new { id=item.Id},null)
+                    $@item.Product.Price
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", "OrderAndProducts", new { id = item.Id }, null)
+                </td>
+            </tr>
+            
+            }
+
+
+            <tr style="border: 0px">
+                <td style="border: 0px"></td>
+                <td style="border: 0px"></td>
+                <td style="border: 0px"></td>
+                <td style="border: 0px"></td>
+                <td style="border: 0px">
+
+                    <div align="right">
+                        Subtotal:$ @subTotal.ToString("0.00")<br />
+                        Tax: $ @(subTotal*0.13)<br />
+                        Total:$ @(subTotal*1.13)
+                    </div>
                 </td>
 
             </tr>
 
-        }
+        </table>
 
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-
-            <td>
-
-                <div align="right">
-                    Subtotal:$ <br />
-                    Total:$
-                </div>
-            </td>
-
-        </tr>
-
-    </table>
-</form>
-<div align="right"><input type="submit" value="Check Out" class="btn btn-default" /></div>
+    </form>
+    <div align="right"><input type="submit" value="Check Out" class="btn btn-default" /></div>
 
 

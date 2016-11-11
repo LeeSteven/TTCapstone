@@ -19,7 +19,27 @@ namespace TurboTechCapstone.Controllers
         {
             //var order = db.Order.Include(o => o.Customer);
             var prodorder = db.OrderAndProducts.Where(x => x.Order_Id == id).Include(p => p.Order).Include(p => p.Product);
-            ViewBag.ProductOrder = prodorder.ToList();
+            ViewBag.ProductOrder = prodorder;
+            var count = db.Product.ToList();
+
+
+            int[] array = new int[count.Count + 1];
+
+            for (int i = 0; i < count.Count; i++)
+            {
+                array[i] = 0;
+            }
+
+            var populate = db.OrderAndProducts.Where(x => x.Order_Id == id);
+
+            foreach (var item in populate)
+            {
+                array[item.Product_Id]++;
+            }
+
+            ViewBag.quant = array;
+            ViewBag.count = count.Count;
+
             return View();
         }
 

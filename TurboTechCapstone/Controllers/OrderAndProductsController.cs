@@ -17,6 +17,9 @@ namespace TurboTechCapstone.Controllers
         // GET: OrderAndProducts
         public ActionResult Index(int? id)
         {
+            ViewBag.TotalCount = db.Product.ToList().Count;
+
+            
 
             return View();
           
