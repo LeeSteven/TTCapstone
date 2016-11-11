@@ -36,6 +36,7 @@ namespace TurboTechCapstone.Controllers
             return View(customer);
         }
 
+        [Authorize]
         // GET: Customers/Create
         public ActionResult Create()
         {
@@ -61,6 +62,7 @@ namespace TurboTechCapstone.Controllers
             return View(customer);
         }
 
+        [Authorize]
         // GET: Customers/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -77,6 +79,8 @@ namespace TurboTechCapstone.Controllers
             return View(customer);
         }
 
+
+        [Authorize]
         // POST: Customers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -94,6 +98,8 @@ namespace TurboTechCapstone.Controllers
             return View(customer);
         }
 
+
+        [Authorize]
         // GET: Customers/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -109,6 +115,8 @@ namespace TurboTechCapstone.Controllers
             return View(customer);
         }
 
+
+        [Authorize]
         // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -128,5 +136,7 @@ namespace TurboTechCapstone.Controllers
             }
             base.Dispose(disposing);
         }
+
+      
     }
 }

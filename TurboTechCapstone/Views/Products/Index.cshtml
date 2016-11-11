@@ -1,141 +1,333 @@
 ﻿@model IEnumerable<TurboTechCapstone.Models.Product>
-
-@{
+                   
+    @{
     var i = 0;
     ViewBag.Title = "Create";
     var ordNum = ViewBag.OrderNum;
     var allProds = ViewBag.AllProducts;
-}
+    }
+                      @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                      {
+                      <h2>Index</h2>
 
-<head>
-   
-        <meta charset="utf-8">
-        <title>RECIPES</title>
-        @Styles.Render("~/Content/css.css")
-        @Styles.Render("~/Content/home.css")
-        @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/Content/jquery.js")
-        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-        <style>
-            body {
-                background: #FCB716;
-            }
-      img {
-                text-align: center;
-                width: 200px;
-                height: auto;
-            }
+                      <p>
+                          @Html.ActionLink("Create New", "Create")
+                      </p>
+                      <p>
+                          @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+                          {
+                          <b>Search by:</b>
+                          @Html.RadioButton("searchBy", "Name", true) <text>Product Name</text>
+                          @Html.RadioButton("searchBy", "Category") <text>Category (Mild, Medium, Spicy)</text>
+                          @Html.TextBox("search") <input type="submit" value="Search" />
+                          }
+                      </p>
 
-        td.desc {
-            padding: 20px;
-            text-align: center;
-        }
+                      <table class="table" border="1">
+                          <tr>
+                              <th>
+                                  @Html.DisplayNameFor(model => model.ProductName)
+                              </th>
+                              <th>
+                                  @Html.DisplayNameFor(model => model.Category)
+                              </th>
+                              <th>
+                                  @Html.DisplayNameFor(model => model.Description)
+                              </th>
+                              <th>
+                                  @Html.DisplayNameFor(model => model.Quantity)
+                              </th>
+                              <th>
+                                  @Html.DisplayNameFor(model => model.Price)
+                              </th>
+                              <th>
+                                  @Html.DisplayNameFor(model => model.Image)
+                              </th>
+                              <th></th>
+                          </tr>
+                          @if (Model.Count() == 0)
+                          {
+                          <tr>
+                              <td colspan="5">
+                                  No rows match search criteria
+                              </td>
+                          </tr>
+                          }
+                          else
+                          {
 
-        table {
-            height: 50px;
-            margin: auto;
-        }
+                          foreach (var item in Model)
+                          {
+                          <tr>
+                              <td>
+                                  @Html.DisplayFor(modelItem => item.ProductName)
+                              </td>
+                              <td>
+                                  @Html.DisplayFor(modelItem => item.Category)
+                              </td>
+                              <td>
+                                  @Html.DisplayFor(modelItem => item.Description)
+                              </td>
+                              <td>
+                                  @Html.DisplayFor(modelItem => item.Quantity)
+                              </td>
+                              <td>
+                                  @Html.DisplayFor(modelItem => item.Price)
+                              </td>
+                              <td>
+                                  @Html.DisplayFor(modelItem => item.Image)
 
-        #fright{
-            text-align:right;
-        }
-    
-		          #pic1{
-		             
-		              -webkit-transition: all .2s ease-in-out; 
-		          }
-		          .transition {
-		              transform: scale(1.2);
-		          }
-		        
-		</style>
-    <script>
-		          $(document).ready(function() {
-		              $('#pic1,#pic2').hover(function() {
-		                  $(this).addClass('transition');
+                              </td>
+                              <td>
+                                  @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
+                                  @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
+                                  @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+                              </td>
+                          </tr>
+                          }
+                          }
 
-		              }, function() {
-		                  $(this).removeClass('transition');
-		              });
-		          });
-
-    </script>
-
-</head>
-<body>
-    <div id="fright">
-        @using (Html.BeginForm("Index", "Products", FormMethod.Get))
-        {
-            <b>Search by:</b>
-            @Html.RadioButton("searchBy", "Name", true) <text>Product Name</text>
-            @Html.RadioButton("searchBy", "Category") <text>Category (Mild, Medium, Spicy)</text>
-            @Html.TextBox("search") <input type="submit" value="Search" />
-        }
-    </div>
-
-
-    <table>
-
-       
-            @if (Model.Count() == 0)
-            {
-            <tr>
-                <td colspan="5">
-                    No rows match search criteria
-                </td>
-            </tr>
-            }
-     
-
-       
-            @foreach (var item in allProds)
-            {
-                i++;
-                if (i == 4)
-                {
-                    @:<tr>
-                }
-                <td class="desc">
-                    <form action="" method="post">
-                     
-                            <center> <img id="pic1" src="~/img/@item.Image" /></center><br />
-                          
-                            <div class="desc">
-                                <p>Name: @item.ProductName</p>
-                                <p>Price:$ @item.Price</p>
-                                <p>Description: @item.Description</p>
-                                <input style="display:none" type="number" name="prodID" value="@item.ProductId" />
-                                <input style="display: none" type="number" value="@ordNum" name="ordID" />
-                                <input type="submit" value="Create" />
-                            </div>
-</form>
-                </td>
+                      </table>
 
 
-                if (i == 6)
-                {
-                    @:</tr>
-            i=0;
-            }
-            }
-        
-        </table>
-    
-</body>
-@*@using (Html.BeginForm("Create", "Orders", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(modelItem => item.Image)
-        <div class="desc">
+                          }else if (Request.IsAuthenticated)
+                          {
 
-            <b>@Html.DisplayFor(modelItem => item.ProductName)</b><br />
-            Price:$@Html.DisplayFor(modelItem => item.Price)<br />
-            @Html.HiddenFor(modelItem => item.Price)
-            Description: @Html.DisplayFor(modelItem => item.Description)<br />
-            @Html.HiddenFor(modelItem => item.Quantity)
-            <input style="display: none" type="number" value="@" name="ordID" />
-            <input type="submit" value="@item.ProductId" class="btn btn-success" />
+                          <head>
 
-        </div>
-    }*@
+                              <meta charset="utf-8">
+                              <title>RECIPES</title>
+                              @Styles.Render("~/Content/css.css")
+                              @Styles.Render("~/Content/home.css")
+                              @Scripts.Render("~/bundles/modernizr")
+                              @Scripts.Render("~/Content/jquery.js")
+                              <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+                              <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+                              <style>
+                                  body {
+                                      background: #FCB716;
+                                  }
+
+                                  img {
+                                      text-align: center;
+                                      width: 200px;
+                                      height: auto;
+                                  }
+
+                                  td.desc {
+                                      padding: 20px;
+                                      text-align: center;
+                                  }
+
+                                  table {
+                                      height: 50px;
+                                      margin: auto;
+                                  }
+
+                                  #fright {
+                                      text-align: right;
+                                  }
+
+                                  #pic1 {
+                                      -webkit-transition: all .2s ease-in-out;
+                                  }
+
+                                  .transition {
+                                      transform: scale(1.2);
+                                  }
+                              </style>
+                              <script>
+            $(document).ready(function () {
+                $('#pic1,#pic2').hover(function () {
+                    $(this).addClass('transition');
+
+                }, function () {
+                    $(this).removeClass('transition');
+                });
+            });
+
+                              </script>
+
+                          </head>
+                          <body>
+                              <div id="fright">
+                                  @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+                                  {
+                                  <b>Search by:</b>
+                                  @Html.RadioButton("searchBy", "Name", true) <text>Product Name</text>
+                                  @Html.RadioButton("searchBy", "Category") <text>Category (Mild, Medium, Spicy)</text>
+                                  @Html.TextBox("search") <input type="submit" value="Search" />
+                                  }
+                              </div>
+
+
+                              <table>
+
+
+                                  @if (Model.Count() == 0)
+                                  {
+                                  <tr>
+                                      <td colspan="5">
+                                          No rows match search criteria
+                                      </td>
+                                  </tr>
+                                  }
+
+
+
+                                  @foreach (var item in allProds)
+                                  {
+                                  i++;
+                                  if (i == 4)
+                                  {
+                                  @:<tr>
+                                      }
+                                      <td class="desc">
+                                          <form action="" method="post">
+
+                                              <center> <img id="pic1" src="~/img/@item.Image" /></center><br />
+
+                                              <div class="desc">
+                                                  <p>Name: @item.ProductName</p>
+                                                  <p>Price:$ @item.Price</p>
+                                                  <p>Description: @item.Description</p>
+                                                  <input style="display:none" type="number" name="prodID" value="@item.ProductId" />
+                                                  <input style="display: none" type="number" value="@ordNum" name="ordID" />
+                                                  <input type="submit" value="Create" />
+                                              </div>
+                                          </form>
+                                      </td>
+
+
+                                      if (i == 6)
+                                      {
+                                      @:</tr>
+                                  i=0;
+                                  }
+                                  }
+
+                              </table>
+
+                          </body>
+
+
+                          }else{
+
+
+                          <head>
+
+                              <meta charset="utf-8">
+                              <title>RECIPES</title>
+                              @Styles.Render("~/Content/css.css")
+                              @Styles.Render("~/Content/home.css")
+                              @Scripts.Render("~/bundles/modernizr")
+                              @Scripts.Render("~/Content/jquery.js")
+                              <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+                              <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+                              <style>
+                                  body {
+                                      background: #FCB716;
+                                  }
+
+                                  img {
+                                      text-align: center;
+                                      width: 200px;
+                                      height: auto;
+                                  }
+
+                                  td.desc {
+                                      padding: 20px;
+                                      text-align: center;
+                                  }
+
+                                  table {
+                                      height: 50px;
+                                      margin: auto;
+                                  }
+
+                                  #fright {
+                                      text-align: right;
+                                  }
+
+                                  #pic1 {
+                                      -webkit-transition: all .2s ease-in-out;
+                                  }
+
+                                  .transition {
+                                      transform: scale(1.2);
+                                  }
+                              </style>
+                              <script>
+            $(document).ready(function () {
+                $('#pic1,#pic2').hover(function () {
+                    $(this).addClass('transition');
+
+                }, function () {
+                    $(this).removeClass('transition');
+                });
+            });
+
+                              </script>
+
+                          </head>
+                          <body>
+                              <div id="fright">
+                                  @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+                                  {
+                                  <b>Search by:</b>
+                                  @Html.RadioButton("searchBy", "Name", true) <text>Product Name</text>
+                                  @Html.RadioButton("searchBy", "Category") <text>Category (Mild, Medium, Spicy)</text>
+                                  @Html.TextBox("search") <input type="submit" value="Search" />
+                                  }
+                              </div>
+
+
+                              <table>
+
+
+                                  @if (Model.Count() == 0)
+                                  {
+                                  <tr>
+                                      <td colspan="5">
+                                          No rows match search criteria
+                                      </td>
+                                  </tr>
+                                  }
+
+
+
+                                  @foreach (var item in allProds)
+                                  {
+                                  i++;
+                                  if (i == 4)
+                                  {
+                                  @:<tr>
+                                      }
+                                      <td class="desc">
+                                          <form action="" method="post">
+
+                                              <center> <img id="pic1" src="~/img/@item.Image" /></center><br />
+
+                                              <div class="desc">
+                                                  <p>Name: @item.ProductName</p>
+                                                  <p>Price:$ @item.Price</p>
+                                                  <p>Description: @item.Description</p>
+
+                                              </div>
+                                          </form>
+                                      </td>
+
+
+                                      if (i == 6)
+                                      {
+                                      @:</tr>
+                                  i=0;
+                                  }
+                                  }
+
+                              </table>
+
+                          </body>
+
+
+                          }

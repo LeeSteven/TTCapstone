@@ -2,6 +2,8 @@
 @{
     var productOrder = ViewBag.ProductOrder;
 }
+                      @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                      {
 
 <head>
     <meta charset="utf-8" />
@@ -30,8 +32,10 @@
 </style>
     </head>
 <form action="" method="delete">
+<p>admin</p>
     <table class="table">
         <tr>
+
             <th>
                 @Html.DisplayNameFor(model => model.Product.Image)
             </th>
@@ -40,6 +44,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Product.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Price)
             </th>
             <th></th>
         </tr>
@@ -57,30 +64,85 @@
                     <input type="number" min="1" max="99" step="1" value ="@item.Order.Quantity"/> 
                 </td>
                 <td>
+                    @Html.DisplayNameFor(model => model.Product.Price)
+                </td>
+                <td>
                     @Html.ActionLink("Delete","Delete","OrderAndProducts",new { id=item.Id},null)
                 </td>
 
             </tr>
-
+       
         }
-
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-
-            <td>
-
-                <div align="right">
-                    Subtotal:$ <br />
-                    Total:$
-                </div>
-            </td>
-
-        </tr>
 
     </table>
 </form>
 <div align="right"><input type="submit" value="Check Out" class="btn btn-default" /></div>
 
+}else {
+<p>You are the Customer</p>
+                     <head>
+                      <meta charset="utf-8" />
+                      <meta name="viewport" content="width=device-width" />
+                      <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+                      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+                      <title>@ViewBag.Title</title>
+                      @Styles.Render("~/Content/css.css")
+                      @Styles.Render("~/Content/home.css")
+                      @Scripts.Render("~/bundles/modernizr")
+                      @Scripts.Render("~/Content/jquery.js")
 
+                      <style>
+                          body {
+                              background: #FCB716;
+                          }
+                      </style>
+
+
+                      <style>
+                          img {
+                              text-align: center;
+                              width: 60px;
+                              height: auto;
+                          }
+                      </style>
+                      </head>
+                      <form action="" method="delete">
+                          <table class="table">
+                              <tr>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Product.Image)
+                                  </th>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Product.ProductName)
+                                  </th>
+                                  <th>
+                                      @Html.DisplayNameFor(model => model.Product.Quantity)
+                                  </th>
+                                  <th></th>
+                              </tr>
+
+                              @foreach (var item in productOrder)
+                              {
+                              <tr>
+                                  <td>
+                                      <img src="~/img/@item.Product.Image" />
+                                  </td>
+                                  <td>
+                                      @item.Product.ProductName
+                                  </td>
+                                  <td>
+                                      <input type="number" min="1" max="99" step="1" value="@item.Order.Quantity" />
+                                  </td>
+                                  <td>
+                                      @Html.ActionLink("Delete","Delete","OrderAndProducts",new { id=item.Id},null)
+                                  </td>
+
+                              </tr>
+
+                              }
+
+                          </table>
+                      </form>
+                      <div align="right"><input type="submit" value="Check Out" class="btn btn-default" /></div>
+
+}

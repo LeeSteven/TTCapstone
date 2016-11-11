@@ -10,8 +10,10 @@ using TurboTechCapstone.Models;
 
 namespace TurboTechCapstone.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
+         
         private TurboTechCapstoneDB db = new TurboTechCapstoneDB();
 
         // GET: Orders

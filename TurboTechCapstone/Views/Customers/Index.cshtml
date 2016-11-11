@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Index";
 }
+                   
 <head>
     <meta charset="utf-8">
     <title>RECIPES</title>
@@ -84,11 +85,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.OrderId)
         </td>
-        @*<td>
+        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CustomerId }) |
             @Html.ActionLink("Details", "Details", new { id=item.CustomerId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.CustomerId })
-        </td>*@
+        </td>
     </tr>
 }
 
