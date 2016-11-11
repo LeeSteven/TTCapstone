@@ -1,6 +1,89 @@
 ﻿<!DOCTYPE html>
-<html>
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false">
+
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css.css")
+    @Styles.Render("~/Content/home.css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Content/jquery.js")
+    @Scripts.Render("~/Content/styles.css")
+    @Scripts.Render("~/Content/contact.js")
+    @Scripts.Render("~/Content/bootstrap.min.css")
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/reggaeForYouStyle.css")
+
+    <style>
+         body {
+            background: #FCB716;
+        }
+
+        iframe {
+            width: 400px;
+        }
+    </style>
+    </head>
+    <body>
+        <div>
+            <div class="container">
+                <div class="header">
+                    <div class="logo"><a class="none"><img src="~/img/logo-reggae-for-you.png" width="280" height="150" alt="Reggae For You Logo" /></a></div>
+                    <ul>
+                        <li class="hover">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                        <li class="hover">@Html.ActionLink("Recipes", "Recipe", "Home", new { area = "" }, null)</li>
+                        <li class="hover">@Html.ActionLink("Products", "Index", "Products", new { area = "" }, null)</li>
+                        <li class="hover">@Html.ActionLink("Customers", "Index", "Customers", new { area = "" }, null)</li>
+                        <li class="hover">@Html.ActionLink("Orders", "Index", "Orders", new { area = "" }, null)</li>
+                        <li class="hover">@Html.Partial("_LoginPartial")</li>
+                    </ul>                 
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <div class="footer">
+                <ul class="foot">
+                    <li>
+                        <a>
+                            <i class="fa fa-phone" aria-hidden="true"><br>Contact Us</i><br>
+                            <a>@Html.ActionLink("E-Mail", "ContactUs", "Home", new { area = "" }, null)</a>
+                            <a>@Html.ActionLink("Location", "ContactUs", "Home", new { area = "" }, null)</a>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="fa fa-phone" aria-hidden="true"><br>Information</i><br>
+                            <a>@Html.ActionLink("Privacy", "Privacy", "Home", new { area = "" }, null)</a>
+                            <a>@Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, null)</a>
+
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="glyphicon glyphicon-tags" aria-hidden="true"><br>Social</i><br>
+                            <a href="https://www.facebook.com/reggaeforyou/">FaceBook</a>
+                            <a href="https://twitter.com/reggaeforu"> Twitter </a>
+
+                        </a>
+                        
+                </ul>
+            </div>
+        </div>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
+}else if (Request.IsAuthenticated){
+
+<p>you are the customer</p><head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -27,68 +110,136 @@
             width: 400px;
         }
     </style>
-    </head>
-    <body>
-
-
-        <div>
-            <div class="container">
-
-
-                <div class="header">
-                    <div class="logo"><a class="none"><img src="~/img/logo-reggae-for-you.png" width="280" height="150" alt="Reggae For You Logo" /></a></div>
-
-                    <ul>
-
-                        <li class="hover">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                        <li class="hover">@Html.ActionLink("Customer Info", "", "Customers", new { area = "" }, null)</li>
-                        <li class="hover">@Html.ActionLink("New Customer", "Create", "Customers", new { area = "" }, null)</li>
-                        <li class="hover">@Html.ActionLink("Recipes", "Recipe", "Home", new { area = "" }, null)</li>
-                        <li class="hover">@Html.ActionLink("Products", "Index", "Products", new { area = "" }, null)</li>
-                        <li class="hover">@Html.ActionLink("Shopping Cart", "Index", "Orders", new { area = "" }, null)</li>
-
-
-
-
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <div class="footer">
-                <ul class="foot">
-                    <li>
-                        <a>
-                            <i class="fa fa-phone" aria-hidden="true"><br>Contact Us</i><br>
-                            <a>@Html.ActionLink("E-Mail and Location", "ContactUs", "Home", new { area = "" }, null)</a>
-                            <a>@Html.ActionLink("Help", "Index", "Help", new { area = "" }, null)</a>
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <i class="fa fa-phone" aria-hidden="true"><br>Information</i><br>
-                            <a>@Html.ActionLink("Privacy", "Privacy", "Home", new { area = "" }, null)</a>
-                            <a>@Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, null)</a>
-
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <i class="glyphicon glyphicon-tags" aria-hidden="true"><br>Social</i><br>
-                            <a href="https://www.facebook.com/reggaeforyou/">FaceBook</a>
-                            <a href="https://twitter.com/reggaeforu"> Twitter </a>
-
-                        </a>
-                        </a>
+</head>
+<body>
+    <div>
+        <div class="container">
+            <div class="header">
+                <div class="logo"><a class="none"><img src="~/img/logo-reggae-for-you.png" width="280" height="150" alt="Reggae For You Logo" /></a></div>
+                <ul>
+                    <li class="hover">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                    <li class="hover">@Html.ActionLink("Recipes", "Recipe", "Home", new { area = "" }, null)</li>
+                    <li class="hover">@Html.ActionLink("Products", "Index", "Products", new { area = "" }, null)</li>
+                    <li class="hover">@Html.ActionLink("My Profile", "Details", "Customers", new { area = "" }, null)</li>
+                    <li class="hover">@Html.ActionLink("Shopping Cart", "Index", "Orders", new { area = "" }, null)</li>
+                    <li class="hover">@Html.Partial("_LoginPartial")</li>
                 </ul>
             </div>
         </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <div class="footer">
+            <ul class="foot">
+                <li>
+                    <a>
+                        <i class="fa fa-phone" aria-hidden="true"><br>Contact Us</i><br>
+                        <a>@Html.ActionLink("E-Mail", "ContactUs", "Home", new { area = "" }, null)</a>
+                        <a>@Html.ActionLink("Location", "ContactUs", "Home", new { area = "" }, null)</a>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <i class="fa fa-phone" aria-hidden="true"><br>Information</i><br>
+                        <a>@Html.ActionLink("Privacy", "Privacy", "Home", new { area = "" }, null)</a>
+                        <a>@Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, null)</a>
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <i class="glyphicon glyphicon-tags" aria-hidden="true"><br>Social</i><br>
+                        <a href="https://www.facebook.com/reggaeforyou/">FaceBook</a>
+                        <a href="https://twitter.com/reggaeforu"> Twitter </a>
 
-        @RenderSection("scripts", required: false)
-    </body>
-</html>
+                    </a>
+
+            </ul>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+
+}else{
+<p>You are a new user</p> 
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=false">
+
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css.css")
+    @Styles.Render("~/Content/home.css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Content/jquery.js")
+    @Scripts.Render("~/Content/styles.css")
+    @Scripts.Render("~/Content/contact.js")
+    @Scripts.Render("~/Content/bootstrap.min.css")
+    @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/reggaeForYouStyle.css")
+
+    <style>
+ body {
+            background: #FCB716;
+        }
+        iframe {
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="container">
+            <div class="header">
+                <div class="logo"><a class="none"><img src="~/img/logo-reggae-for-you.png" width="280" height="150" alt="Reggae For You Logo" /></a></div>
+                <ul>
+                    <li class="hover">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                    <li class="hover">@Html.ActionLink("Recipes", "Recipe", "Home", new { area = "" }, null)</li>
+                    <li class="hover">@Html.ActionLink("View Products", "Index", "Products", new { area = "" }, null)</li>
+                    <li class="hover">@Html.Partial("_LoginPartial")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <div class="footer">
+            <ul class="foot">
+                <li>
+                    <a>
+                        <i class="fa fa-phone" aria-hidden="true"><br>Contact Us</i><br>
+                        <a>@Html.ActionLink("E-Mail", "ContactUs", "Home", new { area = "" }, null)</a>
+                        <a>@Html.ActionLink("Location", "ContactUs", "Home", new { area = "" }, null)</a>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <i class="fa fa-phone" aria-hidden="true"><br>Information</i><br>
+                        <a>@Html.ActionLink("Privacy", "Privacy", "Home", new { area = "" }, null)</a>
+                        <a>@Html.ActionLink("FAQ", "FAQ", "Home", new { area = "" }, null)</a>
+
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <i class="glyphicon glyphicon-tags" aria-hidden="true"><br>Social</i><br>
+                        <a href="https://www.facebook.com/reggaeforyou/">FaceBook</a>
+                        <a href="https://twitter.com/reggaeforu"> Twitter </a>
+
+                    </a>
+
+            </ul>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+
+}
