@@ -20,7 +20,7 @@ namespace TurboTechCapstone.Models
 
 
         public virtual Customer Customer { get; set; }
-        public virtual Master Master { get; set; }
+       
         public virtual ICollection<OrderAndProducts> OrderAndProducts { get; set; }
     }
 }

@@ -119,7 +119,7 @@ namespace TurboTechCapstone.Controllers
             OrderAndProducts orderAndProducts = db.OrderAndProducts.Find(id);
             db.OrderAndProducts.Remove(orderAndProducts);
             db.SaveChanges();
-             return RedirectToAction("index/" + ViewBag.Order_Id, "Orders");
+             return RedirectToAction("index/" + ViewBag.Order_Id, "Order");
         }
 
         protected override void Dispose(bool disposing)

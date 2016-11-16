@@ -40,10 +40,10 @@ namespace TurboTechCapstone.Controllers
             Product prod = db.Product.Find(prodID);
             Order ord = db.Order.Find(ordId);
 
-            //if (prod == null || ord == null)
-            //{
-            //    return HttpNotFound();
-            //}
+            if ( ord == null)
+            {
+                return HttpNotFound();
+            }
 
             OrderAndProducts orderAndProducts = new OrderAndProducts();
             orderAndProducts.Order_Id = ord.OrderId;
@@ -56,12 +56,12 @@ namespace TurboTechCapstone.Controllers
                 db.OrderAndProducts.Add(orderAndProducts);
 
                 db.SaveChanges();
-                return RedirectToAction("index/" + ord.OrderId, "Orders");
+                return RedirectToAction("index/" + ord.OrderId, "Order");
             }
 
             ViewBag.Order_Id = new SelectList(db.Order, "Id", "UserName", orderAndProducts.Order_Id);
             ViewBag.Product_Id = new SelectList(db.Product, "Id", "Name", orderAndProducts.Product_Id);
-            return RedirectToAction("index", "Orders");
+            return RedirectToAction("index", "Order");
            
 
 

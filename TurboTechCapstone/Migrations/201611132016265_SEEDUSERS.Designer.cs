@@ -7,13 +7,13 @@ namespace TurboTechCapstone.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddedTable : IMigrationMetadata
+    public sealed partial class SEEDUSERS : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SEEDUSERS));
         
         string IMigrationMetadata.Id
         {
-            get { return "201611102320152_AddedTable"; }
+            get { return "201611132016265_SEEDUSERS"; }
         }
         
         string IMigrationMetadata.Source

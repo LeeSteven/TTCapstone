@@ -17,8 +17,10 @@ namespace TurboTechCapstone.Controllers
         // GET: Customers
         public ActionResult Index()
         {
+          
+
             var customer = db.Customer.Include(c => c.Login);
-            return View(customer.ToList());
+                return View(customer.ToList());
         }
 
         // GET: Customers/Details/5

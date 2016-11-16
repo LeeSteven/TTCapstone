@@ -245,9 +245,25 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611102320152_AddedTable.cs" />
-    <Compile Include="Migrations\201611102320152_AddedTable.Designer.cs">
-      <DependentUpon>201611102320152_AddedTable.cs</DependentUpon>
+    <Compile Include="Migrations\201611132010556_firstDB.cs" />
+    <Compile Include="Migrations\201611132010556_firstDB.Designer.cs">
+      <DependentUpon>201611132010556_firstDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611132012371_init.cs" />
+    <Compile Include="Migrations\201611132012371_init.Designer.cs">
+      <DependentUpon>201611132012371_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611132013360_init1.cs" />
+    <Compile Include="Migrations\201611132013360_init1.Designer.cs">
+      <DependentUpon>201611132013360_init1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611132015096_init2.cs" />
+    <Compile Include="Migrations\201611132015096_init2.Designer.cs">
+      <DependentUpon>201611132015096_init2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611132016265_SEEDUSERS.cs" />
+    <Compile Include="Migrations\201611132016265_SEEDUSERS.Designer.cs">
+      <DependentUpon>201611132016265_SEEDUSERS.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -257,7 +273,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Master.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderAndProducts.cs" />
     <Compile Include="Models\Product.cs" />
@@ -355,7 +370,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -429,8 +446,20 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611102320152_AddedTable.resx">
-      <DependentUpon>201611102320152_AddedTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611132010556_firstDB.resx">
+      <DependentUpon>201611132010556_firstDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611132012371_init.resx">
+      <DependentUpon>201611132012371_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611132013360_init1.resx">
+      <DependentUpon>201611132013360_init1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611132015096_init2.resx">
+      <DependentUpon>201611132015096_init2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611132016265_SEEDUSERS.resx">
+      <DependentUpon>201611132016265_SEEDUSERS.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
