@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TurboTechCapstone.Models
 {
-    public class Order
+    public class Orders
     {
         [Key]
         public int OrderId { get; set; }

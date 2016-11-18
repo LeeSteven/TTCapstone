@@ -16,7 +16,12 @@ namespace TurboTechCapstone.Controllers
 
         public ActionResult Index()
         {
-
+            var cust = db.Customer.Where(x => x.Email == User.Identity.Name).FirstOrDefault();
+            if (cust != null)
+            {
+                Session["CustId"] = cust.CustomerId;
+                Session["CustEmail"] = User.Identity.Name;
+            }
             ViewBag.Title = "Home Page";
 
             return View();

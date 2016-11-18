@@ -55,7 +55,7 @@ namespace TurboTechCapstone.Controllers
                  
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Order.Find(id);
+            Orders order = db.Orders.Find(id);
             if (order == null)
             {
                 return HttpNotFound();
@@ -64,7 +64,7 @@ namespace TurboTechCapstone.Controllers
             IEnumerable<Product> prods = db.Product.ToList();
            
             //Example  
-            IEnumerable<Order> orders = db.Order.Where(x => x.CustomerId == 1);
+            IEnumerable<Orders> orders = db.Orders.Where(x => x.CustomerId == 1);
 
             var model = new OrderAndProducts { };
 
@@ -85,7 +85,7 @@ namespace TurboTechCapstone.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //public ActionResult Create([Bind(Include = "OrderId,ProductName,Quantity,SubTotal,Total,Date,Image,CustomerId")] Order order)
-        public ActionResult Create([Bind(Include = "ProductName,Quantity,Image,CustomerId")] Order order)
+        public ActionResult Create([Bind(Include = "ProductName,Quantity,Image,CustomerId")] Orders order)
         {
     
             if (ModelState.IsValid)
@@ -93,7 +93,7 @@ namespace TurboTechCapstone.Controllers
                 order.ProductName = ViewBag.prod;
                 order.ProductName = Request.Form["ProductName"];
                 order.CustomerId = 1;
-                db.Order.Add(order); 
+                db.Orders.Add(order); 
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -109,7 +109,7 @@ namespace TurboTechCapstone.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Order.Find(id);
+            Orders order = db.Orders.Find(id);
             if (order == null)
             {
                 return HttpNotFound();
@@ -123,7 +123,7 @@ namespace TurboTechCapstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrderId,ProductName,Quantity,SubTotal,Total,Date,Image,CustomerId")] Order order)
+        public ActionResult Edit([Bind(Include = "OrderId,ProductName,Quantity,SubTotal,Total,Date,Image,CustomerId")] Orders order)
         {
             if (ModelState.IsValid)
             {
@@ -142,7 +142,7 @@ namespace TurboTechCapstone.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Order.Find(id);
+            Orders order = db.Orders.Find(id);
             if (order == null)
             {
                 return HttpNotFound();
@@ -155,8 +155,8 @@ namespace TurboTechCapstone.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Order order = db.Order.Find(id);
-            db.Order.Remove(order);
+            Orders order = db.Orders.Find(id);
+            db.Orders.Remove(order);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -34,7 +34,7 @@ namespace TurboTechCapstone.Models
 
         public int OrderId { get; set; }
 
-        public virtual ICollection<Order> Order { get; set; }
+        public virtual ICollection<Orders> Order { get; set; }
        
         public virtual Login Login { get; set; }
     }

@@ -17,7 +17,7 @@ namespace TurboTechCapstone.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private TurboTechCapstoneDB db = new TurboTechCapstoneDB();
         public AccountController()
         {
         }
@@ -72,14 +72,14 @@ namespace TurboTechCapstone.Controllers
             {
                 return View(model);
             }
-
-            
+       
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
+
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -163,8 +163,9 @@ namespace TurboTechCapstone.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    return RedirectToAction("Index", "Home");
+                    Session["CustId"] = db.Customer.Where(x=>x.Email==User.Identity.GetUserName().ToString());
+                    ViewBag.CustEmail = User.Identity.GetUserName().ToString();
+                    return RedirectToAction("Create", "Customers");
                 }
                 AddErrors(result);
             }

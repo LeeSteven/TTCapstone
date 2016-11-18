@@ -35,33 +35,48 @@ namespace TurboTechCapstone.Controllers
         
         }
         [HttpPost]
-        public ActionResult Index(int prodID, int ordId)
+        public ActionResult Index(int prodID, [Bind(Include = "ProductName,Quantity,Image,CustomerId")] Orders order)
         {
             Product prod = db.Product.Find(prodID);
-            Order ord = db.Order.Find(ordId);
+            Orders ord;
 
-            if ( ord == null)
+            var cust = db.Customer.Where(x => x.Email == User.Identity.Name).FirstOrDefault();
+
+            if(cust != null)
             {
-                return HttpNotFound();
+                var ods = db.Orders.Where(x => x.CustomerId == cust.CustomerId).FirstOrDefault();
+
+                if(ods != null)
+                {
+                    ord = ods;
+                }
+                else
+                {
+                    ord = new Orders(){
+                        CustomerId = cust.CustomerId
+                    };
+                    db.Orders.Add(ord);
+                    db.SaveChanges();
+                }
+
+                OrderAndProducts orderAndProducts = new OrderAndProducts();
+                orderAndProducts.Order_Id = ord.OrderId;
+                orderAndProducts.Product_Id = prod.ProductId;
+                orderAndProducts.Order = ord;
+                orderAndProducts.Product = prod;
+
+                if (ModelState.IsValid)
+                {
+                    db.OrderAndProducts.Add(orderAndProducts);
+
+                    db.SaveChanges();
+                    return RedirectToAction("index/" + ord.OrderId, "Orders");
+                }
             }
 
-            OrderAndProducts orderAndProducts = new OrderAndProducts();
-            orderAndProducts.Order_Id = ord.OrderId;
-            orderAndProducts.Product_Id = prod.ProductId;
-            orderAndProducts.Order = ord;
-            orderAndProducts.Product = prod;
-
-            if (ModelState.IsValid)
-            {
-                db.OrderAndProducts.Add(orderAndProducts);
-
-                db.SaveChanges();
-                return RedirectToAction("index/" + ord.OrderId, "Order");
-            }
-
-            ViewBag.Order_Id = new SelectList(db.Order, "Id", "UserName", orderAndProducts.Order_Id);
-            ViewBag.Product_Id = new SelectList(db.Product, "Id", "Name", orderAndProducts.Product_Id);
-            return RedirectToAction("index", "Order");
+            //ViewBag.Order_Id = new SelectList(db.Orders, "Id", "UserName", orderAndProducts.Order_Id);
+            //ViewBag.Product_Id = new SelectList(db.Product, "Id", "Name", orderAndProducts.Product_Id);
+            return RedirectToAction("index", "Orders");
            
 
 

@@ -17,7 +17,7 @@ namespace TurboTechCapstone.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-          
+            var holder = ViewBag.CustEmail;
 
             var customer = db.Customer.Include(c => c.Login);
                 return View(customer.ToList());
@@ -26,6 +26,7 @@ namespace TurboTechCapstone.Controllers
         // GET: Customers/Details/5
         public ActionResult Details(int? id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -55,9 +56,10 @@ namespace TurboTechCapstone.Controllers
         {
             if (ModelState.IsValid)
             {
+                customer.Email = (string)ViewBag.CustEmail;
                 db.Customer.Add(customer);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index/"+ (string)Session["CustId"]);
             }
 
             ViewBag.CustomerId = new SelectList(db.Login, "CustomerId", "Username", customer.CustomerId);
@@ -93,6 +95,7 @@ namespace TurboTechCapstone.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(customer).State = EntityState.Modified;
+                customer.Email = (string)ViewBag.CustEmail;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

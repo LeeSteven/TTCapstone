@@ -246,9 +246,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201611132010556_firstDB.cs" />
-    <Compile Include="Migrations\201611132010556_firstDB.Designer.cs">
-      <DependentUpon>201611132010556_firstDB.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201611132012371_init.cs" />
     <Compile Include="Migrations\201611132012371_init.Designer.cs">
       <DependentUpon>201611132012371_init.cs</DependentUpon>
@@ -387,7 +384,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Manage\Create.cshtml" />
     <Content Include="Views\Orders\Delete.cshtml" />
     <Content Include="Views\Orders\Details.cshtml" />
     <Content Include="Views\Orders\Edit.cshtml" />
@@ -446,9 +443,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611132010556_firstDB.resx">
-      <DependentUpon>201611132010556_firstDB.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611132012371_init.resx">
       <DependentUpon>201611132012371_init.cs</DependentUpon>
     </EmbeddedResource>

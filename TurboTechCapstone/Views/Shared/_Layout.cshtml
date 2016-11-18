@@ -1,6 +1,11 @@
 ﻿<!DOCTYPE html>
+@{
+var holder =Session["CustId"];
+}
 @if (Request.IsAuthenticated && User.IsInRole("Admin"))
 {
+
+
 
 <head>
     <meta charset="utf-8" />
@@ -120,7 +125,7 @@
                     <li class="hover">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
                     <li class="hover">@Html.ActionLink("Recipes", "Recipe", "Home", new { area = "" }, null)</li>
                     <li class="hover">@Html.ActionLink("Products", "Index", "Products", new { area = "" }, null)</li>
-                    <li class="hover">@Html.ActionLink("My Profile", "Details", "Customers", new { area = "" }, null)</li>
+                    <li class="hover">@Html.ActionLink("My Profile", "Details/"+@holder, "Customers", new { area = "" }, null)</li>
                     <li class="hover">@Html.ActionLink("Shopping Cart", "Index", "Orders", new { area = "" }, null)</li>
                     <li class="hover">@Html.Partial("_LoginPartial")</li>
                 </ul>
