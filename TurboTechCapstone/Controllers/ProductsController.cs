@@ -37,7 +37,9 @@ namespace TurboTechCapstone.Controllers
         [HttpPost]
         public ActionResult Index(int prodID, [Bind(Include = "ProductName,Quantity,Image,CustomerId")] Orders order)
         {
+            var holder = Session["CustId"];
             Product prod = db.Product.Find(prodID);
+
             Orders ord;
 
             var cust = db.Customer.Where(x => x.Email == User.Identity.Name).FirstOrDefault();
@@ -60,7 +62,7 @@ namespace TurboTechCapstone.Controllers
                 }
 
                 OrderAndProducts orderAndProducts = new OrderAndProducts();
-                orderAndProducts.Order_Id = ord.OrderId;
+                orderAndProducts.Order_Id = (int)holder;
                 orderAndProducts.Product_Id = prod.ProductId;
                 orderAndProducts.Order = ord;
                 orderAndProducts.Product = prod;
@@ -70,7 +72,7 @@ namespace TurboTechCapstone.Controllers
                     db.OrderAndProducts.Add(orderAndProducts);
 
                     db.SaveChanges();
-                    return RedirectToAction("index/" + ord.OrderId, "Orders");
+                    return RedirectToAction("index/" + holder, "Orders");
                 }
             }
 

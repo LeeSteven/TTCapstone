@@ -59,6 +59,7 @@
                 width: 60px;
                 height: auto;
             }
+            
         </style>
     </head>
     
@@ -161,7 +162,7 @@
                     @item.Product.ProductName
                 </td>
                 <td>
-                    @(item.Order.Quantity+1)
+                    @(1)
                 </td>
                 <td>
                     $@item.Product.Price
@@ -180,11 +181,11 @@
                 <td style="border: 0px">
                     @* @Html.ActionLink("Delete","Delete","OrderAndProducts",new { id=item.Id},null)*@
 
-                    <div align="right">
+                    @*<div align="right">
                         Subtotal:$ @subTotal.ToString("0.00")<br />
                         Tax: $ @(subTotal*0.13)<br />
                         Total:$ @(subTotal*1.13)
-                    </div>
+                    </div>*@
                 </td>
 
             </tr>
@@ -194,6 +195,11 @@
         </table>
 
     </form>
-    <div align="right"><input type="submit" value="Check Out" class="btn btn-default" /></div>
+
+@*<button href="https://www.paypal.com/signin">Check Out</button>
+    <div align="right"><input type="submit" value="Check Out" class="btn btn-default" /></div>*@
 
     }
+                      <form action="https://www.paypal.com/signin">
+                          <center><input type="submit" value="Check Out" /></center>
+                      </form>

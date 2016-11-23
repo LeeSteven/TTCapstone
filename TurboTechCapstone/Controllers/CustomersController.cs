@@ -56,7 +56,7 @@ namespace TurboTechCapstone.Controllers
         {
             if (ModelState.IsValid)
             {
-                customer.Email = (string)ViewBag.CustEmail;
+                //customer.Email = (string)ViewBag.CustEmail;
                 db.Customer.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index/"+ (string)Session["CustId"]);
@@ -95,9 +95,9 @@ namespace TurboTechCapstone.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(customer).State = EntityState.Modified;
-                customer.Email = (string)ViewBag.CustEmail;
+                customer.Email = User.Identity.Name;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details/"+ customer.CustomerId + "");
             }
             ViewBag.CustomerId = new SelectList(db.Login, "CustomerId", "Username", customer.CustomerId);
             return View(customer);

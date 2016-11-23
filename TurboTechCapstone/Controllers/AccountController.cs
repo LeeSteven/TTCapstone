@@ -79,7 +79,7 @@ namespace TurboTechCapstone.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-
+          
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -163,8 +163,12 @@ namespace TurboTechCapstone.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    Session["CustId"] = db.Customer.Where(x=>x.Email==User.Identity.GetUserName().ToString());
-                    ViewBag.CustEmail = User.Identity.GetUserName().ToString();
+                    var cust = db.Customer.Where(x => x.Email == User.Identity.Name).FirstOrDefault();
+                    if (cust != null)
+                    {
+                        Session["CustId"] = cust.CustomerId;
+                        Session["CustEmail"] = User.Identity.Name;
+                    }
                     return RedirectToAction("Create", "Customers");
                 }
                 AddErrors(result);

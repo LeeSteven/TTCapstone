@@ -88,7 +88,7 @@ var holder =Session["CustId"];
     </body>
 }else if (Request.IsAuthenticated){
 
-<p>you are the customer</p><head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -126,7 +126,7 @@ var holder =Session["CustId"];
                     <li class="hover">@Html.ActionLink("Recipes", "Recipe", "Home", new { area = "" }, null)</li>
                     <li class="hover">@Html.ActionLink("Products", "Index", "Products", new { area = "" }, null)</li>
                     <li class="hover">@Html.ActionLink("My Profile", "Details/"+@holder, "Customers", new { area = "" }, null)</li>
-                    <li class="hover">@Html.ActionLink("Shopping Cart", "Index", "Orders", new { area = "" }, null)</li>
+                    <li class="hover">@Html.ActionLink("Shopping Cart", "Index/"+@holder, "Orders", new { area = "" }, null)</li>
                     <li class="hover">@Html.Partial("_LoginPartial")</li>
                 </ul>
             </div>
@@ -169,7 +169,7 @@ var holder =Session["CustId"];
 </body>
 
 }else{
-<p>You are a new user</p> 
+ 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />

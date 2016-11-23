@@ -12,14 +12,15 @@ namespace TurboTechCapstone.Controllers
 {
     public class OrderAndProductsController : Controller
     {
+        
         private TurboTechCapstoneDB db = new TurboTechCapstoneDB();
-
+        
         // GET: OrderAndProducts
         public ActionResult Index(int? id)
         {
             ViewBag.TotalCount = db.Product.ToList().Count;
-
             
+
 
             return View();
           
@@ -116,10 +117,11 @@ namespace TurboTechCapstone.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var holder = Session["CustId"];
             OrderAndProducts orderAndProducts = db.OrderAndProducts.Find(id);
             db.OrderAndProducts.Remove(orderAndProducts);
             db.SaveChanges();
-             return RedirectToAction("index/" + ViewBag.Order_Id, "Order");
+             return RedirectToAction("index/"+holder, "Orders");
         }
 
         protected override void Dispose(bool disposing)
