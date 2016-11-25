@@ -52,7 +52,7 @@ namespace TurboTechCapstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustomerId,FirstName,LastName,City,Country,PostalCode,Email,Phone,OrderId")] Customer customer)
+        public ActionResult Create([Bind(Include = "CustomerId,FirstName,LastName,City,Country,Province,Address,PostalCode,Email,Phone,OrderId")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace TurboTechCapstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CustomerId,FirstName,LastName,City,Country,PostalCode,Email,Phone,OrderId")] Customer customer)
+        public ActionResult Edit([Bind(Include = "CustomerId,FirstName,LastName,City,Country,Province,Address,PostalCode,Email,Phone,OrderId")] Customer customer)
         {
             if (ModelState.IsValid)
             {

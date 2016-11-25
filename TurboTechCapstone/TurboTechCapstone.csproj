@@ -262,6 +262,14 @@
     <Compile Include="Migrations\201611132016265_SEEDUSERS.Designer.cs">
       <DependentUpon>201611132016265_SEEDUSERS.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611241747392_init3.cs" />
+    <Compile Include="Migrations\201611241747392_init3.Designer.cs">
+      <DependentUpon>201611241747392_init3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611241750059_addedFields.cs" />
+    <Compile Include="Migrations\201611241750059_addedFields.Designer.cs">
+      <DependentUpon>201611241750059_addedFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -304,9 +312,13 @@
     <Content Include="img\cake.PNG" />
     <Content Include="img\Capture.PNG" />
     <Content Include="img\4.PNG" />
+    <Content Include="img\chili.jpg" />
     <Content Include="img\gift3.PNG" />
     <Content Include="img\1.PNG" />
+    <Content Include="img\hot-mango.jpg" />
     <Content Include="img\logo-reggae-for-you.png" />
+    <Content Include="img\mangoChili.jpg" />
+    <Content Include="img\MangoSauce2.jpg" />
     <Content Include="img\personalizedGBag.PNG" />
     <Content Include="img\reggaeforyou.jpg" />
     <Content Include="img\rumCake.PNG" />
@@ -428,6 +440,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Home\PaymentSucceed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="API\" />
@@ -454,6 +467,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611132016265_SEEDUSERS.resx">
       <DependentUpon>201611132016265_SEEDUSERS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611241747392_init3.resx">
+      <DependentUpon>201611241747392_init3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611241750059_addedFields.resx">
+      <DependentUpon>201611241750059_addedFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

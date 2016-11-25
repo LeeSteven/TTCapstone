@@ -49,7 +49,11 @@ namespace TurboTechCapstone.Controllers
 
         }
 
-        
+        public ActionResult PaymentSucceed()
+        {
+            return View();
+
+        }
 
     }
 }

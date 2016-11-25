@@ -8,6 +8,15 @@
     }
                       @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                       {
+<style>
+#prodImg{
+height: 70px;
+width: 60px;
+
+}
+
+
+</style>
                       <h2>Index</h2>
 
                       <p>
@@ -23,10 +32,10 @@
                           }
                       </p>
 
-                      <table class="table" border="1">
+                      <table class="table table-hover">
                           <tr>
                               <th>
-                                  @Html.DisplayNameFor(model => model.ProductName)
+                                 Product Name
                               </th>
                               <th>
                                   @Html.DisplayNameFor(model => model.Category)
@@ -72,12 +81,12 @@
                                   @Html.DisplayFor(modelItem => item.Price)
                               </td>
                               <td>
-                                  @Html.DisplayFor(modelItem => item.Image)
+                                  <center> <img id="prodImg" src="~/img/@item.Image" /></center><br />
 
                               </td>
                               <td>
-                                  @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
-                                  @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
+                                  @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) 
+                                  @Html.ActionLink("Details", "Details", new { id = item.ProductId }) 
                                   @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
                               </td>
                           </tr>
@@ -188,6 +197,7 @@
                                                   <p>Name: @item.ProductName</p>
                                                   <p>Price:$ @item.Price</p>
                                                   <p>Description: @item.Description</p>
+                                                  <p>Category: @item.Category</p>
                                                   <input style="display:none" type="number" name="prodID" value="@item.ProductId" />
                                                   <input style="display: none" type="number" value="@ordNum" name="ordID" />
                                                   <input type="submit" value="Create" />
@@ -309,7 +319,7 @@
                                                   <p>Name: @item.ProductName</p>
                                                   <p>Price:$ @item.Price</p>
                                                   <p>Description: @item.Description</p>
-
+                                                  <p>Category: @item.Category</p>
                                               </div>
                                           </form>
                                       </td>

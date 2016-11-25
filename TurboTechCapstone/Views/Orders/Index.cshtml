@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TurboTechCapstone.Models.OrderAndProducts>
     @{
     var productOrder = ViewBag.ProductOrder;
-    var subTotal = 0;
+    double subTotal = 0;
     var array = ViewBag.quant;
     var count = ViewBag.count;
     }
@@ -72,7 +72,7 @@
                     @Html.DisplayNameFor(model => model.Product.Image)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Product.ProductName)
+                    Product Name
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Product.Quantity)
@@ -143,7 +143,7 @@
                     @Html.DisplayNameFor(model => model.Product.Image)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Product.ProductName)
+                    Product Name
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Product.Quantity)
@@ -154,6 +154,7 @@
 
             @foreach (var item in productOrder)
             {
+            subTotal += @item.Product.Price;
             <tr>
                 <td>
                     <img src="~/img/@item.Product.Image" />
@@ -181,11 +182,11 @@
                 <td style="border: 0px">
                     @* @Html.ActionLink("Delete","Delete","OrderAndProducts",new { id=item.Id},null)*@
 
-                    @*<div align="right">
+                    <div align="right">
                         Subtotal:$ @subTotal.ToString("0.00")<br />
-                        Tax: $ @(subTotal*0.13)<br />
-                        Total:$ @(subTotal*1.13)
-                    </div>*@
+                        Tax: $ @((subTotal*0.13).ToString("0.00"))<br />
+                        Total:$ @((subTotal*1.13).ToString("0.00"))
+                    </div>
                 </td>
 
             </tr>

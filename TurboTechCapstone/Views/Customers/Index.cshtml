@@ -30,10 +30,10 @@
             @Html.DisplayNameFor(model => model.Login.Username)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            First Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            Last Name
         </th>
         <th>
             @Html.DisplayNameFor(model => model.City)
@@ -42,7 +42,13 @@
             @Html.DisplayNameFor(model => model.Country)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PostalCode)
+            @Html.DisplayNameFor(model => model.Province)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            Postal Code
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Email)
@@ -73,6 +79,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.Country)
         </td>
+        <th>
+            @Html.DisplayFor(modelItem => item.Province)
+        </th>
+        <th>
+            @Html.DisplayFor(modelItem => item.Address)
+        </th>
         <td>
             @Html.DisplayFor(modelItem => item.PostalCode)
         </td>
