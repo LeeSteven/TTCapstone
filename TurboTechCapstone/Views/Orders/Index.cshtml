@@ -201,6 +201,13 @@
     <div align="right"><input type="submit" value="Check Out" class="btn btn-default" /></div>*@
 
     }
-                      <form action="https://www.paypal.com/signin">
-                          <center><input type="submit" value="Check Out" /></center>
+                      <form action="@Url.Action("Charge")" method="POST">
+                          <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                  data-key="pk_test_HO250jPfse6hjcriXX7FhPTw"
+                                  data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                  data-name="Reggae For You"
+                                  data-description="Testing Payment"
+                                  data-currency="CAD"
+                                  data-amount="250000">
+                          </script>
                       </form>

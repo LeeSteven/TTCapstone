@@ -24,11 +24,11 @@ namespace TurboTechCapstone.Controllers
 
             if (searchBy == "Name")
             {
-                return View(db.Product.Where(x => x.ProductName.StartsWith(search) || search == null).ToList());
+                return View(db.Product.Where(x => x.ProductName.Contains(search) || search == null).ToList());
             }
             else
             {
-                return View(db.Product.Where(x => x.Category.StartsWith(search) || search == null).ToList());
+                return View(db.Product.Where(x => x.Category.Contains(search) || search == null).ToList());
             }
 
       

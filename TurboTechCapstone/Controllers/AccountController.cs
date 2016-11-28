@@ -79,8 +79,14 @@ namespace TurboTechCapstone.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-          
-                    return RedirectToLocal(returnUrl);
+
+                    var cust = db.Customer.Where(x => x.Email == User.Identity.Name).FirstOrDefault();
+                    if (cust != null)
+                    {
+                        Session["CustId"] = cust.CustomerId;
+                        Session["CustEmail"] = User.Identity.Name;
+                    }
+                    return RedirectToAction("Create", "Customers");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

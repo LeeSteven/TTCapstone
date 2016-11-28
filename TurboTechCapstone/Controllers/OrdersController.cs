@@ -16,6 +16,22 @@ namespace TurboTechCapstone.Controllers
          
         private TurboTechCapstoneDB db = new TurboTechCapstoneDB();
 
+
+        public ActionResult Charge(string stripeToken, string stripeEmail)
+        {
+            string apiKey = "sk_test_uyHOoT6jWFyehqUw3fUDdlna";
+            var stripeClient = new Stripe.StripeClient(apiKey);
+
+            dynamic response = stripeClient.CreateChargeWithToken(2500, stripeToken, "CAD", stripeEmail);
+
+            if (response.IsError == false && response.Paid)
+            {
+                // success
+            }
+
+            return View("PaymentSucceed");
+
+        }
         // GET: Orders
         public ActionResult Index(int? id)
         {
@@ -168,6 +184,14 @@ namespace TurboTechCapstone.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+
+        public ActionResult PaymentSucceed()
+        {
+            return View();
+
         }
     }
 }
