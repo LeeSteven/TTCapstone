@@ -17,6 +17,7 @@ namespace TurboTechCapstone.Models
         public string Date { get; set; }
         public string Image { get; set; }
         public int CustomerId { get; set; }
+        public bool Shippment { get; set; }
 
 
         public virtual Customer Customer { get; set; }

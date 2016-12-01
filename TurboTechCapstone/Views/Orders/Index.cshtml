@@ -4,6 +4,8 @@
     double subTotal = 0;
     var array = ViewBag.quant;
     var count = ViewBag.count;
+    double totals =0;
+    string texts = "";
     }
     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
     {
@@ -155,6 +157,7 @@
             @foreach (var item in productOrder)
             {
             subTotal += @item.Product.Price;
+            
             <tr>
                 <td>
                     <img src="~/img/@item.Product.Image" />
@@ -185,7 +188,13 @@
                     <div align="right">
                         Subtotal:$ @subTotal.ToString("0.00")<br />
                         Tax: $ @((subTotal*0.13).ToString("0.00"))<br />
-                        Total:$ @((subTotal*1.13).ToString("0.00"))
+                        Total:$ @(((subTotal*1.13)).ToString("0.00"))
+                        @{
+                          
+                          texts = ((((subTotal*1.13)+(0.01))*100).ToString("0.00"));  
+                        }
+                        
+                        
                     </div>
                 </td>
 
@@ -208,6 +217,7 @@
                                   data-name="Reggae For You"
                                   data-description="Testing Payment"
                                   data-currency="CAD"
-                                  data-amount="250000">
+                                  data-amount="@texts">
+                              
                           </script>
                       </form>

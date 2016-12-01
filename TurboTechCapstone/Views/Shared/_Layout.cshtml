@@ -124,7 +124,7 @@ var holder =Session["CustId"];
                 <ul>
                     <li class="hover">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
                     <li class="hover">@Html.ActionLink("Recipes", "Recipe", "Home", new { area = "" }, null)</li>
-                    <li class="hover">@Html.ActionLink("Products", "Index", "Products", new { area = "" }, null)</li>
+                    <li class="hover">@Html.ActionLink("Products", "Index/"+@holder, "Products", new { area = "" }, null)</li>
                     <li class="hover">@Html.ActionLink("My Profile", "Details/"+@holder, "Customers", new { area = "" }, null)</li>
                     <li class="hover">@Html.ActionLink("Shopping Cart", "Index/"+@holder, "Orders", new { area = "" }, null)</li>
                     <li class="hover">@Html.Partial("_LoginPartial")</li>

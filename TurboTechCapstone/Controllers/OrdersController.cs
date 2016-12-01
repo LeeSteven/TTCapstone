@@ -22,22 +22,25 @@ namespace TurboTechCapstone.Controllers
             string apiKey = "sk_test_uyHOoT6jWFyehqUw3fUDdlna";
             var stripeClient = new Stripe.StripeClient(apiKey);
 
-            dynamic response = stripeClient.CreateChargeWithToken(2500, stripeToken, "CAD", stripeEmail);
+            dynamic response = stripeClient.CreateChargeWithToken(2501, stripeToken, "CAD", stripeEmail);
 
             if (response.IsError == false && response.Paid)
             {
                 // success
             }
 
-            return View("PaymentSucceed");
+            return RedirectToAction("PaymentSucceed");
 
         }
         // GET: Orders
         public ActionResult Index(int? id)
         {
-            //var order = db.Order.Include(o => o.Customer);
-            var prodorder = db.OrderAndProducts.Where(x => x.Order_Id == id).Include(p => p.Order).Include(p => p.Product);
-            ViewBag.ProductOrder = prodorder;
+            var holder = (int)Session["CustId"];
+            var holder2 = db.Orders.Where(x => x.CustomerId == holder&& x.Shippment == false).FirstOrDefault();
+            //var prodorder = db.OrderAndProducts.Where(x => x.Order.CustomerId == id).Include(p => p.Order).Include(p => p.Product);
+            var prodorder = db.OrderAndProducts.Where(y => y.Order_Id == holder2.OrderId).Include(p => p.Order).Include(p => p.Product).ToList();
+            ViewBag.ProductOrder = prodorder;   
+
             var count = db.Product.ToList();
 
 
@@ -104,15 +107,16 @@ namespace TurboTechCapstone.Controllers
         public ActionResult Create([Bind(Include = "ProductName,Quantity,Image,CustomerId")] Orders order)
         {
     
-            if (ModelState.IsValid)
-            {
-                order.ProductName = ViewBag.prod;
-                order.ProductName = Request.Form["ProductName"];
-                order.CustomerId = 1;
-                db.Orders.Add(order); 
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            //if (ModelState.IsValid)
+            //{
+
+            //    order.ProductName = ViewBag.prod;
+            //    order.ProductName = Request.Form["ProductName"];
+            //    order.CustomerId = 1;
+            //    db.Orders.Add(order); 
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
 
             ViewBag.CustomerId = new SelectList(db.Customer, "CustomerId", "FirstName", order.CustomerId);
             return View(order);
@@ -187,10 +191,23 @@ namespace TurboTechCapstone.Controllers
         }
 
 
-
+        [HttpGet]
         public ActionResult PaymentSucceed()
         {
-            return View();
+            var holder = User.Identity.Name;
+
+            Orders order = db.Orders.Where(x => x.Customer.Email == holder).Where(y => y.Shippment == false).FirstOrDefault();
+            order.Shippment = true;
+            db.SaveChanges();
+            Orders ord = new Orders();
+            ord.Shippment = false;
+            ord.CustomerId = order.CustomerId;
+
+            db.Orders.Add(ord);
+            
+            db.SaveChanges();
+
+            return View("PaymentSucceed");
 
         }
     }

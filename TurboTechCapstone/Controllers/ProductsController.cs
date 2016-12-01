@@ -46,7 +46,7 @@ namespace TurboTechCapstone.Controllers
 
             if(cust != null)
             {
-                var ods = db.Orders.Where(x => x.CustomerId == cust.CustomerId).FirstOrDefault();
+                var ods = db.Orders.Where(x => x.CustomerId == cust.CustomerId).Where(c => c.Shippment == false).FirstOrDefault();
 
                 if(ods != null)
                 {
@@ -61,8 +61,9 @@ namespace TurboTechCapstone.Controllers
                     db.SaveChanges();
                 }
 
+                var holder2 = db.Orders.Where(y => y.CustomerId ==(int)holder ).Where(c => c.Shippment == false).FirstOrDefault();
                 OrderAndProducts orderAndProducts = new OrderAndProducts();
-                orderAndProducts.Order_Id = (int)holder;
+                orderAndProducts.Order_Id = holder2.OrderId;
                 orderAndProducts.Product_Id = prod.ProductId;
                 orderAndProducts.Order = ord;
                 orderAndProducts.Product = prod;

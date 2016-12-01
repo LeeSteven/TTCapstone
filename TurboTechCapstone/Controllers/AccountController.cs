@@ -80,13 +80,13 @@ namespace TurboTechCapstone.Controllers
             {
                 case SignInStatus.Success:
 
-                    var cust = db.Customer.Where(x => x.Email == User.Identity.Name).FirstOrDefault();
+                    var cust = db.Customer.Where(x => x.Email == (string)model.Email).FirstOrDefault();
                     if (cust != null)
                     {
                         Session["CustId"] = cust.CustomerId;
-                        Session["CustEmail"] = User.Identity.Name;
+                        Session["CustEmail"] = model.Email;
                     }
-                    return RedirectToAction("Create", "Customers");
+                    return RedirectToAction("index/"+ Session["CustId"], "Products");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
