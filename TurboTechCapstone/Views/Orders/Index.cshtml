@@ -4,6 +4,7 @@
     double subTotal = 0;
     var array = ViewBag.quant;
     var count = ViewBag.count;
+    var amount = ViewBag.amount;
     double totals =0;
     string texts = "";
     }
@@ -100,6 +101,7 @@
                 </td>
                 <td>
                     @item.Order.Quantity
+                   
                 </td>
                 <td>
                     $@item.Product.Price
@@ -153,20 +155,24 @@
                 <th colspan="2"> @Html.DisplayNameFor(model => model.Product.Price)</th>
 
             </tr>
-
             @foreach (var item in productOrder)
             {
             subTotal += @item.Product.Price;
+           
+
             
+
+
             <tr>
                 <td>
                     <img src="~/img/@item.Product.Image" />
                 </td>
                 <td>
                     @item.Product.ProductName
-                </td>
+                </td>                                      
+
                 <td>
-                    @(1)
+                    @amount[item.Product.ProductId]
                 </td>
                 <td>
                     $@item.Product.Price
@@ -175,39 +181,32 @@
                     @Html.ActionLink("Delete", "Delete", "OrderAndProducts", new { id = item.Id }, null)
                 </td>
             </tr>
-                
-             }
+            
+        
+}
+
             <tr style="border: 0px">
                 <td style="border: 0px"></td>
                 <td style="border: 0px"></td>
                 <td style="border: 0px"></td>
                 <td style="border: 0px"></td>
                 <td style="border: 0px">
-                    @* @Html.ActionLink("Delete","Delete","OrderAndProducts",new { id=item.Id},null)*@
-
+                   
+@* Subtotal and total *@
                     <div align="right">
                         Subtotal:$ @subTotal.ToString("0.00")<br />
                         Tax: $ @((subTotal*0.13).ToString("0.00"))<br />
                         Total:$ @(((subTotal*1.13)).ToString("0.00"))
                         @{
-                          
-                          texts = ((((subTotal*1.13)+(0.01))*100).ToString("0.00"));  
+                          texts = ((((subTotal*1.13)+0.01)*100).ToString("0.00"));  
                         }
-                        
-                        
+    
                     </div>
                 </td>
-
             </tr>
-
-
-
         </table>
-
     </form>
 
-@*<button href="https://www.paypal.com/signin">Check Out</button>
-    <div align="right"><input type="submit" value="Check Out" class="btn btn-default" /></div>*@
 
     }
                       <form action="@Url.Action("Charge")" method="POST">

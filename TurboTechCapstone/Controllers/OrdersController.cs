@@ -36,13 +36,33 @@ namespace TurboTechCapstone.Controllers
         public ActionResult Index(int? id)
         {
             var holder = (int)Session["CustId"];
-            var holder2 = db.Orders.Where(x => x.CustomerId == holder&& x.Shippment == false).FirstOrDefault();
-            //var prodorder = db.OrderAndProducts.Where(x => x.Order.CustomerId == id).Include(p => p.Order).Include(p => p.Product);
+            
+            var holder2 = db.Orders.Where(x => x.CustomerId == holder && x.Shippment == false).FirstOrDefault();
+            if(holder2 == null)
+            {
+                return View();
+
+            }
             var prodorder = db.OrderAndProducts.Where(y => y.Order_Id == holder2.OrderId).Include(p => p.Order).Include(p => p.Product).ToList();
             ViewBag.ProductOrder = prodorder;   
 
             var count = db.Product.ToList();
 
+            //test
+            var testCount = count.Count();
+            int[] amount = new int[testCount+2];
+
+            //for (int i = 0; i <= testCount+2; i++)
+            //{
+            //    amount[i] = 0;
+            //}
+            foreach (var item in count)
+            {
+
+                amount[item.ProductId] = amount[item.ProductId]+1;
+            }
+
+            //end
 
             int[] array = new int[count.Count + 1];
 
@@ -60,6 +80,7 @@ namespace TurboTechCapstone.Controllers
 
             ViewBag.quant = array;
             ViewBag.count = count.Count;
+            ViewBag.amount = amount;
 
             return View();
         }
