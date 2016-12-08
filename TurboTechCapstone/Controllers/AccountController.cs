@@ -169,11 +169,11 @@ namespace TurboTechCapstone.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    var cust = db.Customer.Where(x => x.Email == User.Identity.Name).FirstOrDefault();
+                    var cust = db.Customer.Where(x => x.Email == (string)model.Email).FirstOrDefault();
                     if (cust != null)
                     {
                         Session["CustId"] = cust.CustomerId;
-                        Session["CustEmail"] = User.Identity.Name;
+                        Session["CustEmail"] = model.Email;
                     }
                     return RedirectToAction("Create", "Customers");
                 }

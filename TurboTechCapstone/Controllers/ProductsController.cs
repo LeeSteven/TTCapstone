@@ -17,6 +17,7 @@ namespace TurboTechCapstone.Controllers
         // GET: Products
         public ActionResult Index(int? id, string searchBy, string search)
         {
+            
             ViewBag.OrderNum = id;
             var allProds = db.Product.ToList();
             ViewBag.AllProducts = allProds;
@@ -44,6 +45,11 @@ namespace TurboTechCapstone.Controllers
 
             var cust = db.Customer.Where(x => x.Email == User.Identity.Name).FirstOrDefault();
 
+            if (holder == null)
+            {
+                return RedirectToAction("Login", "Account");
+
+            }
             if(cust != null)
             {
                 var ods = db.Orders.Where(x => x.CustomerId == cust.CustomerId).Where(c => c.Shippment == false).FirstOrDefault();

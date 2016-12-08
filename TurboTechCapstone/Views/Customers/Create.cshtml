@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Create";
+    Layout = null;
 }
 
 
@@ -36,10 +37,21 @@
     </style>
 </head>
 <body>
-  
+    <div>
+        <div class="container">
+            <div class="header" style="height:35%">
+                <div class="logo"><a class="none"><img src="~/img/logo-reggae-for-you.png" width="280" height="150" alt="Reggae For You Logo" /></a></div>
+                <ul>
+                    <li class="hover">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                    <li class="hover">@Html.ActionLink("Recipes", "Recipe", "Home", new { area = "" }, null)</li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="container body-content">
        
-<p><h2>Become A Member</h2><br />You can become a member by filling out the information below <b>OR</b> continue shopping by clicking on the <b><i>Products</i></b> tab</p>
+@*<p><h2>Become A Member</h2><br />You can become a member by filling out the information below <b>OR</b> continue shopping by clicking on the <b><i>Products</i></b> tab</p>*@
 
         @using (Html.BeginForm())
         {

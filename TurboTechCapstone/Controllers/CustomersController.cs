@@ -59,11 +59,11 @@ namespace TurboTechCapstone.Controllers
                 //customer.Email = (string)ViewBag.CustEmail;
                 db.Customer.Add(customer);
                 db.SaveChanges();
-                return RedirectToAction("Index/"+ (string)Session["CustId"]);
+                return RedirectToAction("Login", "Account");
             }
 
             ViewBag.CustomerId = new SelectList(db.Login, "CustomerId", "Username", customer.CustomerId);
-            return View(customer);
+            return RedirectToAction("Login", "Account");
         }
 
         [Authorize]
